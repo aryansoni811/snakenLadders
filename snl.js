@@ -117,24 +117,24 @@ const snakenladders = (Name1, Name2) => {
     let position, temp;
     //validation for player
     if (player !== currentPlayer) {
-      return [false, `Not your turn. It's ${currentPlayer}'s turn.`];
+      return [601, `Not your turn. It's ${currentPlayer}'s turn.`];
     }
     //validation for move
     if (!checkValidMove(move)) {
-      return [false, "Invalid move, try again"];
+      return [602, "Invalid move, try again"];
     }
     // **validate if the move is available or not ie. final move should be before 100**
     temp = currentPosition[currentPlayer] + move;
     if (temp === 100) {
-      return [false, "Congratulations You have WON the Game!!!"];
+      return [610, `Congratulations ${currentPlayer} has WON the Game!!!`];
     } else if (100 < temp) {
-      return [false, `This move is not available for ${currentPlayer}.`];
+      currentPlayer = nextPlayer[currentPlayer];
+      return [611, `This move is not available for ${currentPlayer}`];
     } else {
       position = advanceGame(currentPlayer, move);
       currentPlayer = nextPlayer[currentPlayer];
-      return [true, position];
+      return [600, position];
     }
-
     //advance the game
     //1. move the pieces and check if they land on any snake or ladder
     // if they do move the pieces accordingly
