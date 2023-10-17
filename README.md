@@ -49,7 +49,8 @@ I first applied a way to compare the strings and then decide the output, it work
 
 ## Screenshots
 
-![altText](url)
+![gameStart](https://github.com/aryansoni811/snakenLadders/blob/main/images/Screenshot%202023-10-17%20172012.png?raw=true)
+![gameEnd](https://github.com/aryansoni811/snakenLadders/blob/main/images/Screenshot%202023-10-17%20171952.png?raw=true)
 
 ## Future Scope
 
