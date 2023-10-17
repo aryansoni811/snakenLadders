@@ -11,7 +11,7 @@ let result,
 do {
   const randomNumber = Math.floor(Math.random() * 6) + 1;
 
-  console.log(`Dice = ${randomNumber}`);
+  console.log(`${i % 2 ? "red" : "blue"} Dice = ${randomNumber}`);
   [result, message] = play(`${i % 2 ? "red" : "blue"}`, randomNumber);
   if (result === 600) {
     console.log(`${i % 2 ? "red" : "blue"} is in position ${message}`);

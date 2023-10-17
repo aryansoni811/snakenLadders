@@ -1,3 +1,4 @@
+//FUNCTION TO BUILD BOARD
 const buildBoard = (snakes, ladder) => {
   let board = [];
   for (let i = 0; i <= 100; i++) board.push(i);
@@ -13,10 +14,40 @@ const buildBoard = (snakes, ladder) => {
       l++;
     }
   }
+  //just for visual presentation
+  //sorting by their second index to show start and end point of snake and ladder
+  //not needed i guess.
+  //can also be done through rerferencing the second index of array in board.
+  //   snakes.sort((a, b) => a[1] - b[1]);
+  //   ladder.sort((a, b) => a[1] - b[1]);
 
+  //   for (let i = 1, s = 0, l = 0; i <= 100; i++) {
+  //     if (s < snakes.length && snakes[s][1] === i) {
+  //       board[i] = `s${s}`;
+  //       s++;
+  //     }
+
+  //     if (l < ladder.length && ladder[l][1] === i) {
+  //       board[i] = `L${l}`;
+  //       l++;
+  //     }
+  //   }
+
+  let k = 0;
+  console.log("this is the game engine board.");
+  // here S marks the snakes and l marks the ladder starting point
+  for (let i = 1; i <= 10; i++) {
+    let row = "";
+    for (let j = 1; j <= 10; j++) {
+      row += board[100 - k] + " ";
+      k++;
+    }
+    console.log(row);
+  }
   return board;
 };
 
+//MAIN GAME ENGINE
 const snakenladders = (Name1, Name2) => {
   // was thinking of using objects but accessing each key was kinda cumbersome
   //   snakes = {
@@ -45,22 +76,6 @@ const snakenladders = (Name1, Name2) => {
     [41, 79],
     [54, 88],
   ];
-  //sorting by their second index to PS. for these two lines gpt helped, not good in js sorting
-  //not needed i guess.
-  //   snakes.sort((a, b) => a[1] - b[1]);
-  //   ladder.sort((a, b) => a[1] - b[1]);
-
-  //   for (let i = 1, s = 0, l = 0; i <= 100; i++) {
-  //     if (s < snakes.length && snakes[s][1] === i) {
-  //       board[i] = `s${s}`;
-  //       s++;
-  //     }
-
-  //     if (l < ladder.length && ladder[l][1] === i) {
-  //       board[i] = `L${l}`;
-  //       l++;
-  //     }
-  //   }
 
   console.log(`${Name1} is Red`);
   console.log(`${Name2} is Blue.`);
@@ -88,7 +103,7 @@ const snakenladders = (Name1, Name2) => {
     red: 0,
     blue: 0,
   };
-  //advance the game function
+  //function to advance the game
   const advanceGame = (currentPlayer, move) => {
     //move the piece
     currentPosition[currentPlayer] = currentPosition[currentPlayer] + move;
@@ -100,12 +115,12 @@ const snakenladders = (Name1, Name2) => {
       if (b[0] === "S") {
         currentPosition[currentPlayer] = snakes[p][1];
         console.log(
-          `${currentPlayer} was cut by a snake. From${snakes[p][0]} to ${snakes[p][1]}`
+          `${currentPlayer} was cut by a snake. From ${snakes[p][0]} to ${snakes[p][1]}`
         );
       } else if (b[0] === "l") {
         currentPosition[currentPlayer] = ladder[p][1];
         console.log(
-          `${currentPlayer} got a ladder. From${ladder[p][0]} to ${ladder[p][1]}`
+          `${currentPlayer} got a ladder. From ${ladder[p][0]} to ${ladder[p][1]}`
         );
       }
     }
@@ -123,13 +138,17 @@ const snakenladders = (Name1, Name2) => {
     if (!checkValidMove(move)) {
       return [602, "Invalid move, try again"];
     }
-    // **validate if the move is available or not ie. final move should be before 100**
     temp = currentPosition[currentPlayer] + move;
+    //winning condition
     if (temp === 100) {
       return [610, `Congratulations ${currentPlayer} has WON the Game!!!`];
     } else if (100 < temp) {
+      // **validate if the move is available or not ie. final move should be before 100**
       currentPlayer = nextPlayer[currentPlayer];
-      return [611, `This move is not available for ${currentPlayer}`];
+      return [
+        611,
+        `This move is not available for ${nextPlayer[currentPlayer]}`,
+      ];
     } else {
       position = advanceGame(currentPlayer, move);
       currentPlayer = nextPlayer[currentPlayer];
